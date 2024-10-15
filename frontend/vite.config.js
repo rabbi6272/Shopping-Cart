@@ -8,5 +8,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
+    proxy: {
+      "/api/products": {
+        target: "https://shopping-cart-mp3c.onrender.com",
+      },
+    },
   },
 });
