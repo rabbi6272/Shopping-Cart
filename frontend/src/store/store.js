@@ -3,8 +3,13 @@ import { create } from "zustand";
 export const useProductStore = create((set) => ({
   products: [],
   setProducts: (products) => set({ products }),
+
   isLoading: false,
+
+  // Error handling
   error: null,
+
+  // Product details
   productDetails: {
     name: "",
     price: "",
@@ -17,7 +22,7 @@ export const useProductStore = create((set) => ({
   fetchProducts: async () => {
     set({ isLoading: true });
     try {
-      const response = await fetch("/api/products", {
+      const response = await fetch("http://localhost:5000/api/products", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -31,30 +36,11 @@ export const useProductStore = create((set) => ({
   },
 
   // Create a new product
-  createProduct: async (productData) => {
-    if (!productData.name || !productData.price || !productData.image)
-      return { success: false, message: "Please provide product data" };
-
-    try {
-      const response = await fetch("/api/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...productData,
-        }),
-      });
-      return await response.json();
-    } catch (error) {
-      set({ error: error.message, isLoading: false });
-    }
-  },
 
   // Update an existing product
   updateProduct: async (id, updatedData) => {
     try {
-      const response = await fetch(`/api/products/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/products/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -72,13 +58,6 @@ export const useProductStore = create((set) => ({
   // Delete a product
   deleteProduct: async (id) => {
     try {
-      const response = await fetch(`/api/products/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id }),
-      });
       set((state) => ({
         products: state.products.filter((product) => product.id !== id),
         isLoading: false,
@@ -88,4 +67,19 @@ export const useProductStore = create((set) => ({
       set({ error: error.message, isLoading: false });
     }
   },
+}));
+
+// Admin login
+export const useAdminStore = create((set) => ({
+  admin: false,
+  setAdmin: (admin) => set({ admin: admin }),
+
+  adminDetails: {
+    name: "",
+    email: "",
+    password: "",
+    secretCode: "",
+    rememberMe: false,
+  },
+  setAdminDetails: (adminDetails) => set({ adminDetails: adminDetails }),
 }));

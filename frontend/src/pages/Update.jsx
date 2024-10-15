@@ -3,7 +3,7 @@ import { Input, Button } from "@material-tailwind/react";
 import { useProductStore } from "../store/store";
 import { useNavigate } from "react-router-dom";
 
-export default function UpdatePage({ cardBg, text }) {
+export default function UpdatePage() {
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ export default function UpdatePage({ cardBg, text }) {
         });
         setTimeout(() => {
           navigate("/");
-        }, 2000);
+        }, 1500);
       } else {
         toast({
           status: "error",
@@ -67,10 +67,10 @@ export default function UpdatePage({ cardBg, text }) {
   }
 
   return (
-    <div className={`h-[90vh] grid place-items-center `}>
+    <div className={`h-[90vh] grid place-items-center bg-gray-200`}>
       <form
         onSubmit={(e) => handleProductSubmit(e, id)}
-        className={`${cardBg} ${text} shadow-xl p-4 m-auto flex flex-col gap-4 w-[90vw] md:w-3/5 lg:w-2/5 rounded-lg`}
+        className={`bg-white shadow-xl p-4 m-auto flex flex-col gap-4 w-[90vw] md:w-3/5 lg:w-2/5 rounded-lg`}
       >
         <Input
           label="Name"

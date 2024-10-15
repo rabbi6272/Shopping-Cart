@@ -1,5 +1,6 @@
 import express from "express";
 import ShopingItem from "../model/shopingItem.model.js";
+import verifyJWT from "../middlewires/verifyJWT.js";
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", verifyJWT, async (req, res) => {
   const { name, price, image } = req.body;
   if (!name || !price || !image) {
     return res
@@ -32,11 +33,11 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", verifyJWT, async (req, res) => {
   const { id } = req.params;
   const { name, price, image } = req.body;
   try {
-    const shopingItem = await ShopingItem.findByIdAndUpdate(
+    await ShopingItem.findByIdAndUpdate(
       id,
       { name, price, image },
       { new: true }
@@ -46,12 +47,11 @@ router.put("/:id", async (req, res) => {
       .json({ success: true, message: "Item updated successfully" });
   } catch (error) {
     console.log(error);
-
     res.status(500).json({ success: false, message: "Server Error" });
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verifyJWT, async (req, res) => {
   const { id } = req.params;
   try {
     const shopingItem = await ShopingItem.findByIdAndDelete(id);

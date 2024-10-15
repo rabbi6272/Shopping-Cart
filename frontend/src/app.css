@@ -15,7 +15,16 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
 }
-
+@media screen and (max-width: 1024px) {
+  .cardContainer {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+@media screen and (max-width: 768px) {
+  .cardContainer {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
 /* HTML: <div class="loader"></div> */
 .loader {
   width: 50px;
@@ -45,6 +54,7 @@
   }
 }
 
+/* card animation */
 .show {
   transform: translateY(0%);
   transition: transform 0.5s ease-in-out;
@@ -53,4 +63,15 @@
 .hide {
   transform: translateY(-120%);
   transition: transform 0.5s ease-in-out;
+}
+
+.img-container {
+  border-radius: 6px 6px 0 0;
+}
+.card-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.1) 20%
+  );
 }
