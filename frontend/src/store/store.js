@@ -69,7 +69,7 @@ export const useProductStore = create((set) => ({
   },
 }));
 
-// Admin login
+// Admin settings
 export const useAdminStore = create((set) => ({
   admin: false,
   setAdmin: (admin) => set({ admin: admin }),

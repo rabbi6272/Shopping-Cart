@@ -13,8 +13,8 @@ adminRouter.post("/login", async (req, res) => {
   const cookies = req.cookies.admin_token;
   if (cookies) {
     return res
-      .status(403)
-      .json({ success: false, message: "Already logged in" });
+      .status(200)
+      .json({ success: true, message: "Already logged in" });
   }
   const { email, password, rememberMe } = req.body;
   if (!email || !password) {
@@ -43,6 +43,7 @@ adminRouter.post("/login", async (req, res) => {
     let expieryTime = rememberMe
       ? 1000 * 60 * 60 * 24 * 30
       : 1000 * 60 * 60 * 24;
+
     res.cookie("admin_token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",

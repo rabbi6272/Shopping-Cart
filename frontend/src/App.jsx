@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 
-import { useProductStore, useAdminStore } from "./store/store";
+import { useAdminStore } from "./store/store";
 
 import HomePage from "./pages/Home.jsx";
 import UpdatePage from "./pages/Update.jsx";
@@ -27,15 +27,12 @@ export default function App() {
         },
       });
       const data = await response.json();
-      if (data.success === false && data.message === "Already logged in") {
+      if (data.success === true && data.message === "Already logged in") {
         setAdmin(true);
       }
     }
-
-    {
-      !admin && login();
-    }
-  });
+    login();
+  }, [admin, setAdmin]);
 
   return (
     <div className="h-auto min-h-screen font-nunito bg-gray-200">

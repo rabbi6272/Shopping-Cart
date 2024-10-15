@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@material-tailwind/react";
 import { EditIcon, DeleteIcon, InfoOutlineIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
-import { useProductStore } from "../store/store";
+import { useProductStore, useAdminStore } from "../store/store";
 import { useToast } from "@chakra-ui/react";
 
 export default function ProductCard({ product }) {
@@ -10,7 +10,8 @@ export default function ProductCard({ product }) {
 
   const fetchProducts = useProductStore((state) => state.fetchProducts);
   const setProductDetails = useProductStore((state) => state.setProductDetails);
-  const admin = useProductStore((state) => state.admin);
+
+  const admin = useAdminStore((state) => state.admin);
 
   const toast = useToast();
 

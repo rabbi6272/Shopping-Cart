@@ -19,10 +19,9 @@ export default function AdminLogin() {
   const adminDetails = useAdminStore((state) => state.adminDetails);
   const setAdminDetails = useAdminStore((state) => state.setAdminDetails);
 
-  const admin = useAdminStore((state) => state.admin);
   const setAdmin = useAdminStore((state) => state.setAdmin);
 
-  async function handleAdminSubmit(e, adminDetails) {
+  async function handleAdminSubmit(e) {
     e.preventDefault();
     if (!adminDetails.email || !adminDetails.password)
       return toast({
@@ -85,13 +84,13 @@ export default function AdminLogin() {
 
   return (
     <div className="bg-inherit min-h-screen w-full flex justify-center items-center">
-      <Card color="white" shadow={true} className=" p-4 ">
+      <Card color="white" shadow={"true"} className=" p-4 ">
         <Typography variant="h3" color="blue-gray" className="text-center">
           Log In
         </Typography>
         <form
           className="mt-6 mb-2 w-80 max-w-screen-lg sm:w-96"
-          onSubmit={(e) => handleAdminSubmit(e, adminDetails)}
+          onSubmit={(e) => handleAdminSubmit(e)}
         >
           <div className="mb-1 flex flex-col gap-6">
             <Typography variant="h6" color="blue-gray" className="-mb-6">
@@ -139,14 +138,17 @@ export default function AdminLogin() {
             containerProps={{ className: "-ml-2.5" }}
             value={adminDetails.rememberMe}
             onChange={(e) =>
-              setAdminDetails({ ...adminDetails, rememberMe: !rememberMe })
+              setAdminDetails({
+                ...adminDetails,
+                rememberMe: !e.target.rememberMe,
+              })
             }
           />
           <Button
             className="mt-6"
             fullWidth
             type="submit"
-            onClick={(e) => handleAdminSubmit(e, adminDetails)}
+            onClick={(e) => handleAdminSubmit(e)}
           >
             sign in
           </Button>

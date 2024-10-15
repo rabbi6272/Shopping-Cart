@@ -1,9 +1,9 @@
 import { Text, Tooltip } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useProductStore } from "../store/store";
+import { useAdminStore } from "../store/store";
 
 export default function Navbar() {
-  const admin = useProductStore((state) => state.admin);
+  const admin = useAdminStore((state) => state.admin);
   return (
     <nav className="w-full px-4 py-2 flex justify-between items-center sticky top-0 font-inter z-10 bg-white">
       <Link to="/">
