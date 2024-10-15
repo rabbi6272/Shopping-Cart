@@ -14,25 +14,25 @@ import Navbar from "./components/navbar.jsx";
 import "./app.css";
 
 export default function App() {
-  const admin = useAdminStore((state) => state.admin);
-  const setAdmin = useAdminStore((state) => state.setAdmin);
+  // const admin = useAdminStore((state) => state.admin);
+  // const setAdmin = useAdminStore((state) => state.setAdmin);
 
-  useEffect(() => {
-    async function login() {
-      const response = await fetch("http://localhost:5000/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          credentials: "include",
-        },
-      });
-      const data = await response.json();
-      if (data.success === true && data.message === "Already logged in") {
-        setAdmin(true);
-      }
-    }
-    login();
-  }, [admin, setAdmin]);
+  // useEffect(() => {
+  //   async function login() {
+  //     const response = await fetch("http://localhost:5000/admin/login", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         credentials: "include",
+  //       },
+  //     });
+  //     const data = await response.json();
+  //     if (data.success === true && data.message === "Already logged in") {
+  //       setAdmin(true);
+  //     }
+  //   }
+  //   login();
+  // }, [admin, setAdmin]);
 
   return (
     <div className="h-auto min-h-screen font-nunito bg-gray-200">
